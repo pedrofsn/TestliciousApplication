@@ -22,28 +22,30 @@ class MainActivityTest {
     @Rule
     @JvmField
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
+    private val string = "Hello World!"
 
     @Test
     fun verifyInputtedValueInEditText() {
-        val string = "Hello World!"
         onView(withId(R.id.editText)).run {
             perform(ViewActions.clearText(), ViewActions.typeText(string))
+            check(matches(isDisplayed()))
             check(matches(withText(string)))
         }
     }
 
     @Test
     fun verifyClick() {
-        val string = "Hello World!"
-
-        onView(withId(R.id.editText)).run {
-            perform(ViewActions.clearText(), ViewActions.typeText(string))
-        }
+        verifyInputtedValueInEditText()
 
         onView(withId(R.id.button)).run {
-            perform(ViewActions.click())
             check(matches(isDisplayed()))
+            perform(ViewActions.click())
         }
+    }
+
+    @Test
+    fun verifyToast() {
+        verifyClick()
 
         Thread.currentThread()
         try {
