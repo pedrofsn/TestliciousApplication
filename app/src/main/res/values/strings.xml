@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TesteliciousApplication</string>
+    <string name="input_any_text">Input any text</string>
+    <string name="perform">Perform</string>
 </resources>
