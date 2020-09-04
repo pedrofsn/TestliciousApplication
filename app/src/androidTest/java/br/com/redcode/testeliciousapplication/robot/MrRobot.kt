@@ -11,6 +11,8 @@ import org.hamcrest.Matchers
 
 class MrRobot(private val rule: ActivityTestRule<*>) : Actions {
 
+    private lateinit var text: String
+
     override fun inputText(text: String): MrRobot {
         Espresso.onView(ViewMatchers.withId(R.id.editText)).run {
             perform(ViewActions.clearText(), ViewActions.typeText(text))
@@ -28,7 +30,7 @@ class MrRobot(private val rule: ActivityTestRule<*>) : Actions {
         return this
     }
 
-    override fun showToast(text: String): ResultMrRobot {
+    override infix fun finalize(code: ResultMrRobot.() -> Unit): ResultMrRobot {
         Thread.currentThread()
 
         Thread.sleep(500)
@@ -37,7 +39,7 @@ class MrRobot(private val rule: ActivityTestRule<*>) : Actions {
             .inRoot(RootMatchers.withDecorView(Matchers.`is`(rule.activity.window.decorView)))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
 
-        return ResultMrRobot()
+        return ResultMrRobot().apply { code() }
     }
 
 }
