@@ -14,6 +14,8 @@ class MrRobot(private val rule: ActivityTestRule<*>) : Actions {
     private lateinit var text: String
 
     override fun inputText(text: String): MrRobot {
+        this.text = text
+
         Espresso.onView(ViewMatchers.withId(R.id.editText)).run {
             perform(ViewActions.clearText(), ViewActions.typeText(text))
             check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
