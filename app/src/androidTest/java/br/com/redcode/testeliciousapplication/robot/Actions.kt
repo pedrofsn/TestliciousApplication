@@ -4,6 +4,6 @@ interface Actions {
 
     fun inputText(text: String): MrRobot
     fun callToAction(): MrRobot
-    fun showToast(text: String): ResultMrRobot
+    fun finalize(code: ResultMrRobot.() -> Unit): ResultMrRobot
 
 }
